@@ -48,4 +48,14 @@ class DbHelper {
     Database db = await instance.database;
     return db.insert('mobil', mbl.toMap());
   }
+  
+  Future<int> updateMbl(Mobil mbl) async {
+    Database db = await instance.database;
+    return await db.update('mobil', mbl.toMap(),
+        where: 'id = ?', whereArgs: [mbl.id]);
+  }
+  Future<int> deleteMbl(int id) async {
+    Database db = await instance.database;
+    return await db.delete('mobil', where: 'id = ?', whereArgs: [id]);
+  }
 }

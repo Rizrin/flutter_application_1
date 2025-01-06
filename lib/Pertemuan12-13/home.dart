@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Pertemuan12-13/Form/input_mobil.dart';
+import 'package:flutter_application_1/Pertemuan12-13/Form/ubah_mobil.dart';
 import 'package:flutter_application_1/Pertemuan12-13/Helper/database_helper.dart';
 import 'package:flutter_application_1/Pertemuan12-13/Model/mobil.dart';
 
@@ -11,6 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int? selectedid;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,33 @@ class _HomeState extends State<Home> {
                   color: Colors.white70,
                   child: ListTile(
                     title: Text(mobil.nama!),
+                    onTap: () {
+                      setState(() {
+                        if (selectedid == mobil.id) {
+                          selectedid = null;
+                        } else {
+                          selectedid = mobil.id;
+                        }
+                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UbahMobil(
+                            id: mobil.id,
+                            nama: mobil.nama,
+                            warna: mobil.warna,
+                            tahun: mobil.tahun,
+                          )));
+                    },
+                    trailing: InkWell(
+                      onTap: () {
+                         setState(() {  DbHelper.instance.deleteMbl(mobil.id!);});
+
+                      },
+                      child: const Icon(Icons.delete_forever_rounded,
+                      size: 30,
+                       color: Colors.red,),
+                    ),
                   ),
                 );
               },

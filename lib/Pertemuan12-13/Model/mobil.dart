@@ -10,7 +10,7 @@ class Mobil {
     required this.nama,
     required this.warna,
     required this.tahun,
-    required this.transmisi,
+    required this.transmisi
   });
 
   // Factory method untuk membuat objek Mobil dari JSON
@@ -19,15 +19,17 @@ class Mobil {
         nama: json['nama'],
         warna: json['warna'],
         tahun: json['tahun'],
-        transmisi: json['transmisi'],
+        transmisi: json['transmisi']
       );
 
   // Method untuk mengubah objek Mobil ke format JSON
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'nama': nama,
-        'warna': warna,
-        'tahun': tahun,
-        'transmisi': transmisi,
-      };
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'nama': nama,
+      'warna': warna,
+      'tahun': tahun,
+      'transmisi': transmisi
+    };
+  }
 }
